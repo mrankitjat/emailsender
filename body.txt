@@ -1,1 +1,11 @@
+Hi
 
+I am writing to express my interest in the Java Developer position.
+
+With four years of experience specializing in Java, Spring Boot, and microservices architecture, I have a strong foundation in building scalable backend systems that align well with this role. My attached resume provides further details on my expertise.
+
+Thank you for your time and consideration. I look forward to the possibility of discussing how my background can contribute to your team.
+
+Best regards,
+Ankit Kumar
+7300150214
