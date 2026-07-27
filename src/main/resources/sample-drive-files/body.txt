@@ -1,0 +1,8 @@
+Dear Hiring Manager,
+
+I am writing to express my strong interest in the Java Backend Developer position. Attached please find my updated resume detailing my technical experience in Java, Spring Boot, Microservices, and Cloud Architecture.
+
+Thank you for your time and consideration.
+
+Best regards,
+Applicant

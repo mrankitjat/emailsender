@@ -1,0 +1,70 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: recruitment-email-service
+    profiles:
+      active: ${ACTIVE_PROFILE:uat}
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:your-gmail-address@gmail.com}
+    password: ${MAIL_PASSWORD:your-16-character-app-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: ${MAIL_CONNECTION_TIMEOUT:5000}
+          timeout: ${MAIL_TIMEOUT:5000}
+          writetimeout: ${MAIL_WRITE_TIMEOUT:5000}
+
+google:
+  drive:
+    credentials-path: ${GOOGLE_CREDENTIALS_PATH:classpath:credentials.json}
+    folder-id: ${GOOGLE_FOLDER_ID:sample-folder-id}
+    application-name: recruitment-email-service
+
+recruitment:
+  storage:
+    type: ${STORAGE_TYPE:HTTP} # Default set to HTTP for GitHub integration
+    local-dir: ${LOCAL_STORAGE_DIR:./recruitment-assets}
+    http:
+      base-url: ${HTTP_BASE_URL:https://raw.githubusercontent.com/mrankitjat/emailsender/main}
+      token: ${GITHUB_TOKEN:${HTTP_TOKEN:}} # GitHub PAT token if private repo
+      emails-file: ${EMAILS_FILE_NAME:emails.txt}
+      subject-file: ${SUBJECT_FILE_NAME:subject.txt}
+      body-file: ${BODY_FILE_NAME:body.txt}
+      resume-file: ${RESUME_FILE_NAME:resume.pdf}
+
+email:
+  cache-minutes: ${EMAIL_CACHE_MINUTES:0}
+  async:
+    core-pool-size: 5
+    max-pool-size: 15
+    queue-capacity: 100
+    thread-name-prefix: EmailAsync-
+  retry:
+    max-attempts: 3
+    backoff-ms: 1000
+  rate-limit:
+    delay-ms: 100
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method

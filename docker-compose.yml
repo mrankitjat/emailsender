@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  recruitment-email-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recruitment-email-service
+    ports:
+      - "8080:8080"
+    environment:
+      - MAIL_HOST=smtp.gmail.com
+      - MAIL_PORT=587
+      - MAIL_USERNAME=${MAIL_USERNAME:-your-email@gmail.com}
+      - MAIL_PASSWORD=${MAIL_PASSWORD:-your-app-password}
+      - GOOGLE_CREDENTIALS_PATH=${GOOGLE_CREDENTIALS_PATH:-classpath:credentials.json}
+      - GOOGLE_FOLDER_ID=${GOOGLE_FOLDER_ID:-sample-folder-id}
+      - EMAIL_CACHE_MINUTES=10
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
